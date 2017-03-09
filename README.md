@@ -1,8 +1,6 @@
 # MapCNO
 Map Container - Codenameone
 
-El proyecto deberá ser realizado en Codenameone que es un framework JAVA que se utiliza para generar códigos nativos para IOS y Android.
- 
 El proyecto consta de dos pantallas.
 La primera pantalla tendrá :
 -          Un mapa que muestre un marcador con la localización del dispositivo.  El usuario debe poder arrastrar el marcador en el mapa
