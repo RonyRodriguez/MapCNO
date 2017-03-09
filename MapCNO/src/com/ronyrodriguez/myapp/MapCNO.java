@@ -58,10 +58,10 @@ public class MapCNO {
     public void checkGPS(final MapContainer mapc) {
         if (Display.getInstance().getLocationManager().isGPSDetectionSupported()) {
             if (Display.getInstance().getLocationManager().isGPSEnabled()) {
-                InfiniteProgress ip = new InfiniteProgress();
-                final Dialog ipDlg = ip.showInifiniteBlocking();
+                InfiniteProgress ipr = new InfiniteProgress();
+                final Dialog dialog = ipr.showInifiniteBlocking();
                 Location loc = LocationManager.getLocationManager().getCurrentLocationSync(10000);
-                ipDlg.dispose();
+                dialog.dispose();
                 if (loc != null) {
                     double lat = loc.getLatitude();
                     double lng = loc.getLongitude();
@@ -73,16 +73,16 @@ public class MapCNO {
                         err.printStackTrace();
                     }
                 } else {
-                    Dialog.show("GPS error", "Your location could not be found, please try going outside for a better GPS signal", "Ok", null);
+                    Dialog.show("GPS error", "No se pudo encontrar tu ubicación, intenta salir por una mejor señal GPS", "Ok", null);
                 }
             } else {
-                Dialog.show("GPS desactivado", "This needs access to GPS. Please enable GPS", "Ok", null);
+                Dialog.show("GPS Inhabilitado", "Esto necesita acceso al GPS. Habilita el GPS", "Ok", null);
             }
         } else {
             InfiniteProgress ip = new InfiniteProgress();
-            final Dialog ipDlg = ip.showInifiniteBlocking();
+            final Dialog dialog = ip.showInifiniteBlocking();
             Location loc = LocationManager.getLocationManager().getCurrentLocationSync(10000);
-            ipDlg.dispose();
+            dialog.dispose();
             if (loc != null) {
                 double lat = loc.getLatitude();
                 double lng = loc.getLongitude();
@@ -136,9 +136,9 @@ public class MapCNO {
         tl.setGrowHorizontally(true);
         form.setLayout(tl);
 
-        TextField info = new TextField("", "Information", 20, TextArea.ANY);
+        TextField info = new TextField("", "Información", 20, TextArea.ANY);
 
-        Button submit = new Button("Next");
+        Button submit = new Button("Continuar");
 
         submit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -149,7 +149,7 @@ public class MapCNO {
                     info.getAllStyles().setBgColor(0xFFFFFF);
                     info.getComponentForm().repaint();
                     Form f = new Form();
-                    Button back = new Button("Back");
+                    Button back = new Button("Regresar");
                     back.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent ev) {
                             submit.getComponentForm().showBack();
@@ -169,7 +169,7 @@ public class MapCNO {
                     tlong.setEditable(false);
                     tlong.setEnabled(false);
 
-                    f.add("Latitude:").add(tlat).add("Longitude:").add(tlong).add("Information").add(tinfo).add(back);
+                    f.add("Latitud:").add(tlat).add("Longitud:").add(tlong).add("Información extra").add(tinfo).add(back);
                     f.show();
                 }
             }
@@ -178,7 +178,7 @@ public class MapCNO {
         TableLayout.Constraint cn = tl.createConstraint();
         cn.setHorizontalSpan(spanButton);
         cn.setHorizontalAlign(Component.RIGHT);
-        form.add("Information").add(info).
+        form.add("Información").add(info).
                 add(cn, submit).add(mapc);
 
         form.addCommand(new Command("Rony Rodriguez") {
